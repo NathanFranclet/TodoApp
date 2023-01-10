@@ -1,0 +1,23 @@
+{
+  "name": "book-graph-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=@neo4j/graphql:* nodemon index.js --watch .env --watch todo.graphql --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@neo4j/graphql": "^1.2.4",
+    "@neo4j/graphql-ogm": "^2.3.0",
+    "apollo-server": "^2.25.2",
+    "dotenv": "^8.6.0",
+    "graphql": "^15.6.1",
+    "neo4j-driver": "^4.3.3",
+    "njwt": "^1.1.0",
+    "nodemon": "^2.0.13"
+  }
+}

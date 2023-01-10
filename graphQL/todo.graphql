@@ -1,0 +1,23 @@
+type Task{
+  id: ID @id
+  title: String
+#  contains: [Task] @relationship(type: "CONTAINS", direction: OUT)
+  owner: User @relationship(type: "OWNED_BY", direction: OUT)
+  done: Boolean @default(value: false)
+}
+
+extend type Task @auth(rules: [{ operations: [CREATE, READ, UPDATE, DELETE], OR : [{roles: ["admin"]}, {bind: { owner:{id: "$jwt.sub" }}, allow: { owner:{id: "$jwt.sub" }}}]}])
+
+type User{
+  id: ID @id
+  username: String!
+  password: String! @private
+  roles: [String!]
+}
+
+extend type User @auth(rules: [{ operations: [CREATE, READ, UPDATE, DELETE], OR: [{ roles: ["admin"] }, { allow: { id: "$jwt.sub" } }] }])
+
+type Mutation {
+  signUp(username: String!, password: String!): String! ### JWT
+  signIn(username: String!, password: String!): String! ### JWT
+}
